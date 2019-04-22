@@ -1,0 +1,43 @@
+* xinput persistence for all devices
+Typically when trying to setup a keymap, mouse, or other xinput device, the
+command is not persistent at boot! Nor is it persistence when the device is
+temporarily disconnected. The solution is to either use a sleep function, or to
+monitor udev. Here I chose to monitor udev for all devices.
+
+* Installation
+
+First, you need to know a portion of each device's name and device path. Find
+these out like this:
+
+```shell
+# Plugin the device
+$ xinput
+...
+...DeathAdder...
+# Unplug the device
+$ udevadm monitor
+...
+# Now plug it in
+UDEV  [2607.521415] add      /devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1:1.2/0003:1532:005C.003C/input/input137/input137::numlock (leds)
+                               ^^^^^^^^^^
+                              Need a string from here, like 'usb'
+# I used usb for my devices
+```
+
+Now that you have those, modify commands.conf from my personal choices:
+
+```shell
+monitor.pl -n 'device name #1' -d 'usb or other part of the path'
+monitor.pl -n 'device name #2' -d 'usb or other part of the path'
+```
+
+You can have as many devices as required. For example, you might add a PS/2
+keyboard also:
+
+```shell
+monitor.pl -n 'device name #1' -d 'usb or other part of the path'
+monitor.pl -n 'device name #2' -d 'usb or other part of the path'
+monitor.pl -n 'N-rollover' -d 'ps/2'
+```
+
+The program will fork each one.
