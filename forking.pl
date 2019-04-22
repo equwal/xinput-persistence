@@ -1,7 +1,8 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-open my $com, '<', 'commands.conf';
+my $pwd = $ARGV[0];
+open my $com, '<', "$pwd/commands.conf";
 for(<$com>) {
     my $f = fork();
     if (defined $f) {
