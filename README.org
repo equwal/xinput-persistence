@@ -47,4 +47,6 @@ You can have as many devices as required, just add a new monitor.pl command to t
 
 The program will fork each one.
 
-Make sure to add =forking.pl= to your startup scripts.
+Make sure to add =forking.pl= to your startup scripts. Also, note that this is a
+BRAND NEW REPO, and there are bugs. For example, in order to run forking.pl, you
+must first =cd= to the directory it is in!
