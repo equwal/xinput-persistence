@@ -14,7 +14,9 @@ like this:
 # Plugin the device
 $ xinput
 ...
-...DeathAdder Elite...
+...DeathAdder Elite id=...
+              ^^^^
+             Need the last portion of this name.
 #+END_SRC
 
 #+BEGIN_SRC sh
