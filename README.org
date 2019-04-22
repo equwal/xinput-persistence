@@ -6,14 +6,15 @@ monitor udev. Here I chose to monitor udev for all devices.
 
 * Installation
 
-First, you need to know a portion of each device's name and device path. Find
-these out like this:
+First, you need to know the last portion of each device's name, a portion of the
+device path, and the name of the property you want to watch for. Find these out
+like this:
 
 ```shell
 # Plugin the device
 $ xinput
 ...
-...DeathAdder...
+...DeathAdder Elite...
 # Unplug the device
 $ udevadm monitor
 ...
@@ -27,17 +28,23 @@ UDEV  [2607.521415] add      /devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1:1.2/0
 Now that you have those, modify commands.conf from my personal choices:
 
 ```shell
-monitor.pl -n 'device name #1' -d 'usb or other part of the path'
-monitor.pl -n 'device name #2' -d 'usb or other part of the path'
+monitor.pl -n 'device name #1' -d 'usb or other part of the path' -c1 'xinput ' <id inserted here> -c2 ' rest of command'
+monitor.pl -n 'device name #2' -d 'usb or other part of the path' -c1 'no-id-required command'
 ```
+
+Perl will insert the ID of the xinput device if -c2 is specified, and it will be
+placed between the c1 and c2 commands. Commands that do not need the xinput id
+can omit -c2.
 
 You can have as many devices as required. For example, you might add a PS/2
 keyboard also:
 
 ```shell
-monitor.pl -n 'device name #1' -d 'usb or other part of the path'
-monitor.pl -n 'device name #2' -d 'usb or other part of the path'
-monitor.pl -n 'N-rollover' -d 'ps/2'
+monitor.pl -n 'device name #1' -d 'usb or other part of the path' -c 'command'
+monitor.pl -n 'device name #2' -d 'usb or other part of the path' -c 'command'
+monitor.pl -n 'N-rollover' -d 'ps/2' -c 'command'
 ```
 
-The program will fork each one.
+The program will fork each one, with the controller process looping forever.
+
+Make sure to add forking.pl to your startup scripts.
