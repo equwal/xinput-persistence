@@ -41,15 +41,8 @@ Perl will insert the ID of the xinput device if -c2 is specified, and it will be
 placed between the c1 and c2 commands. Commands that do not need the xinput id
 can omit -c2.
 
-You can have as many devices as required. For example, you might add a PS/2
-keyboard also:
+You can have as many devices as required, just add a new monitor.pl command to the file. 
 
-#+BEGIN_SRC shell
-monitor.pl -n 'device name #1' -d 'usb or other part of the path' -c 'command'
-monitor.pl -n 'device name #2' -d 'usb or other part of the path' -c 'command'
-monitor.pl -n 'N-rollover' -d 'ps/2' -c 'command'
-#+END_SRC shell
+The program will fork each one.
 
-The program will fork each one, with the controller process looping forever.
-
-Make sure to add forking.pl to your startup scripts.
+Make sure to add =forking.pl= to your startup scripts.
