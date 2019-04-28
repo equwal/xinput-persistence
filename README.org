@@ -45,10 +45,11 @@ can omit -c2.
 
 Finally, install it
 #+BEGIN_SRC sh
+~# cd ~/xinput-persistence
 ~/xinput-persistence# ./install.pl
 #+END_SRC
 You can have as many devices as required, just add a new monitor.pl command to
 the file.  The program will fork each one. There is no need to reinstall when
-adding new lines.
+adding new lines. Start with =$ monitor=.
 
 Make sure to add =/usr/bin/monitor= to your startup scripts.
