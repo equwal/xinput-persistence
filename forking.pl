@@ -1,8 +1,12 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-my $ps = `ps -e | grep monitor\\.pl`;
+my $ps = `ps -eo pid,cmd | grep monitor\\.pl`;
 if(!($ps eq '')) {
+    $ps =~ /(^[0-9]+)/;
+    my $pid = $1;
+    print "Monitor already running at pid $pid. Try \$ ps -eo pid,cmd | grep $pid\n";
+} else {
     my $pwd = $ARGV[0];
     open my $com, '<', "$pwd/commands.conf";
     for(<$com>) {
@@ -13,6 +17,5 @@ if(!($ps eq '')) {
             `$_`;
         }
     }
-
     while(1){;}
 }
