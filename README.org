@@ -1,3 +1,4 @@
+- Note: this thing barely works -
 * xinput persistence for all devices
 Typically when trying to setup a keymap, mouse, or other xinput device, the
 command is not persistent at boot! Nor is it persistent when the device is
